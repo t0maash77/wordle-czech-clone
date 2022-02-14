@@ -40,7 +40,11 @@ const animateRowShake = (row) => {
 // GAME OVER
 const youVeryMuchLose = () => {
 	let board = document.querySelector('.board')
-	board.classList.add('animate__animated', 'animate__hinge')
+	board.classList.add('animate__animated', 'animate__hinge');
+
+	setTimeout(() => {
+		board.className = 'board';
+	}, 2000);
 }
 
 // HIGHLIGHT LETTERS
