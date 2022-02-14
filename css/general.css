@@ -71,6 +71,7 @@ header small {
 	background-color: #818384;
 	margin: 4px;
 	text-transform: uppercase;
+	cursor: pointer;
 }
 
 .keyboard button:nth-child(11) {
@@ -105,10 +106,14 @@ header small {
 		margin: .35em;
 	}
 	.keyboard button:nth-child(28) {
-		width: 4rem;
+		width: 2rem;
 	}
 	.keyboard button:nth-child(11) {
 		margin-left: 1.2rem;
+	}
+
+	.keyboard button:nth-child(20) {
+		width: 3.3rem;
 	}
 
 	.keyboard {
