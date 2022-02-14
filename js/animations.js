@@ -28,7 +28,7 @@ const animateTileDance = (row) => {
 	})
 }
 
-// SHAKE WHOLE ROW, WHEN YOU SUBMIT A NON-EXISTANT WORD
+// SHAKE WHOLE ROW, WHEN YOU SUBMIT A NON-EXISTENT WORD
 const animateRowShake = (row) => {
 	row.classList.remove('animate__shakeX')
 
@@ -43,7 +43,7 @@ const youVeryMuchLose = () => {
 	board.classList.add('animate__animated', 'animate__hinge')
 }
 
-// HIGHTLIGHT LETTERS
+// HIGHLIGHT LETTERS
 const highlightLetters = (row) => {
 	let lettersToCheck = noAccentSolution.split('')
 
@@ -67,7 +67,7 @@ const highlightLetters = (row) => {
 		tile.classList.add(colorClass)
 	})
 
-	// keyboard row in footer
+	// keyboard buttons
 	document.querySelectorAll('.keyboard button').forEach(button => {
 		let colorClass = ''
 

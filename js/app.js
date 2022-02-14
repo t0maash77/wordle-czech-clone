@@ -5,7 +5,9 @@ const maxTries = 6
 let word = ''
 let tries = 1
 
-let solution = allWords[allWords.length * Math.random() | 0].toLowerCase()
+let possibleSolutions = allWords.filter(x => x.charAt(0) !== x.charAt(0).toUpperCase());
+
+let solution = possibleSolutions[possibleSolutions.length * Math.random() | 0].toLowerCase()
 let noAccentSolution = noAccents(solution)
 let noAccentWords = allWords.map(x => noAccents(x))
 
@@ -153,5 +155,5 @@ const findLettersInRow = () => {
 
 // REMOVE ACCENTS
 function noAccents (str) {
-	return str.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
+	return str.normalize("NFD").replace(/\p{Diacritic}/gu, "");
 }
