@@ -86,7 +86,7 @@ header small {
 
 
 /* RESPONSIVE */
-@media only screen and (max-width: 940px) {
+@media only screen and (min-width: 481px) and (max-width: 940px) {
 	header h1 {
 		font-size: 1.5rem;
 		letter-spacing: 0.05rem;
@@ -96,9 +96,7 @@ header small {
 	.keyboard {
 		grid-template-columns: repeat(16, 1fr);
 	}
-}
 
-@media only screen and (max-width: 480px) {
 	.keyboard button {
 		font-size: .8rem;
 		width: 1.5rem;
@@ -118,8 +116,118 @@ header small {
 	}
 
 	.keyboard {
-		width: 86vw;
+		width: 45vw;
 		padding-bottom: 15vh;
 		padding-left: 2vw;
+	}
+
+	.board {
+		gap: 1px !important;
+	}
+
+	header {
+		padding-top: 0;
+	}
+}
+
+@media only screen and (min-width: 401px) and (max-width: 480px) {
+	.keyboard button {
+		font-size: .8rem;
+		width: 1.5rem;
+		height: 2rem;
+		line-height: 2rem;
+		margin: .35em;
+	}
+	.keyboard button:nth-child(28) {
+		width: 2rem;
+	}
+	.keyboard button:nth-child(11) {
+		margin-left: 1.2rem;
+	}
+
+	.keyboard button:nth-child(20) {
+		width: 3.3rem;
+	}
+
+	.keyboard {
+		width: 80vw;
+		padding-bottom: 15vh;
+		padding-left: 2vw;
+	}
+
+	.board {
+		gap: 1px !important;
+	}
+
+	header {
+		padding-top: 0;
+	}
+}
+
+@media only screen and (min-width: 375px) and (max-width: 400px) {
+	.keyboard button {
+		font-size: .8rem;
+		width: 1.5rem;
+		height: 2rem;
+		line-height: 2rem;
+		margin: .35em;
+	}
+	.keyboard button:nth-child(28) {
+		width: 2rem;
+	}
+	.keyboard button:nth-child(11) {
+		margin-left: 1.2rem;
+	}
+
+	.keyboard button:nth-child(20) {
+		width: 3.3rem;
+	}
+
+	.keyboard {
+		width: 90vw;
+		padding-bottom: 15vh;
+		padding-left: 2vw;
+	}
+
+	.board {
+		gap: 1px !important;
+	}
+
+	header {
+		padding-top: 0;
+	}
+}
+
+@media only screen and (max-width: 374px) {
+	.keyboard button {
+		font-size: .5rem;
+		width: 1.5rem;
+		height: 2rem;
+		line-height: 2rem;
+		margin: .35em;
+	}
+	.keyboard button:nth-child(28) {
+		width: 2rem;
+	}
+	.keyboard button:nth-child(11) {
+		margin-left: 1.2rem;
+	}
+
+	.keyboard button:nth-child(20) {
+		width: 3.3rem;
+	}
+
+	.keyboard {
+		width: 91vw;
+		padding-bottom: 15vh;
+		padding-left: 10vw;
+	}
+
+	.board {
+		gap: 1px !important;
+	}
+
+	header {
+		padding-top: 0;
 	}
 }
