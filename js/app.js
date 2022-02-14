@@ -82,8 +82,6 @@ const addLetter = (character) => {
 
 		animateTileBounce(tile)
 	}
-
-	// console.log(word)
 }
 
 // REMOVE LETTER

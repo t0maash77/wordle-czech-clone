@@ -28,6 +28,7 @@ body {
 header {
 	display: flex;
 	align-items: center;
+	padding-top: 4rem;
 }
 
 header h1 {
