@@ -62,7 +62,6 @@ const highlightLetters = (row) => {
 			lettersCount[letter] = currentLetterValue - 1;
 
 			colorClass = 'correct'
-			lettersToCheck[index] = null
 		}
 		// this letter is present in the solution, but at a different place
 		else if (lettersToCheck.indexOf(letter) >= 0) {
@@ -73,9 +72,7 @@ const highlightLetters = (row) => {
 				lettersCount[letter] = currentLetterValue - 1;
 
 				colorClass = 'present'
-				lettersToCheck[index] = null
 			}
-
 		}
 
 		tile.classList.add(colorClass)
