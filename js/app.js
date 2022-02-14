@@ -176,14 +176,14 @@ function getResultDialog (win = true) {
 		backdrop: true,
 		buttons: {
 			no: {
-				label: 'Zavřít',
+				label: 'Zavřít aplikaci ❌',
 				className: 'btn-secondary',
 				callback: function(){
-					//TODO - něco udělat
+					window.close();
 				}
 			},
 			yes: {
-				label: 'Pokračovat',
+				label: 'Pokračovat v hraní ✅',
 				className: 'btn-primary',
 				callback: function(){
 					window.location.reload();
