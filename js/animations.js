@@ -45,7 +45,8 @@ const youVeryMuchLose = () => {
 
 // HIGHLIGHT LETTERS
 const highlightLetters = (row) => {
-	let lettersToCheck = noAccentSolution.split('')
+	const lettersCount = countLettersInWord(noAccentSolution);
+	const lettersToCheck = noAccentSolution.split('')
 
 	row.querySelectorAll('.tile').forEach((tile, index) => {
 		tile.style.visibility = 'hidden'
@@ -55,13 +56,26 @@ const highlightLetters = (row) => {
 
 		// the correct letter is in correct the place
 		if (lettersToCheck[index] === letter) {
+
+			//Remove 1 from count of the letter in the word (so there is no duplicate present classes)
+			const currentLetterValue = lettersCount[letter];
+			lettersCount[letter] = currentLetterValue - 1;
+
 			colorClass = 'correct'
 			lettersToCheck[index] = null
 		}
 		// this letter is present in the solution, but at a different place
 		else if (lettersToCheck.indexOf(letter) >= 0) {
-			colorClass = 'present'
-			lettersToCheck[index] = null
+			//If the letter is in the solution at least once
+			if (lettersCount[letter] > 0) {
+				//Remove 1 from count of the letter in the word (so there is no duplicate present classes)
+				const currentLetterValue = lettersCount[letter];
+				lettersCount[letter] = currentLetterValue - 1;
+
+				colorClass = 'present'
+				lettersToCheck[index] = null
+			}
+
 		}
 
 		tile.classList.add(colorClass)
@@ -77,4 +91,13 @@ const highlightLetters = (row) => {
 
 		if (colorClass) button.classList.add(colorClass)
 	})
+}
+
+const countLettersInWord = (searchedWord) => {
+	let letters = {}
+	for(let chr of searchedWord) {
+		letters[chr] = letters.hasOwnProperty(chr) ? letters[chr] + 1: 1;
+	}
+
+	return letters;
 }

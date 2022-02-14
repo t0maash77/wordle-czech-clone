@@ -112,7 +112,7 @@ const judgeResult = () => {
 	if (noAccents(word) === noAccentSolution) {
 		animateTileDance(currentRow())
 		setTimeout(() => {
-			if (confirm('Vyhrál jsi na ' + tries + ' pokusy/ů. Chceš pokračovat?')) {
+			if (confirm('Vyhrál/a jsi na ' + tries + ' pokusy/ů. Chceš pokračovat?')) {
 				window.location.reload();
 			}
 		}, 2000)
@@ -163,5 +163,5 @@ const findLettersInRow = () => {
 
 // REMOVE ACCENTS
 function noAccents (str) {
-	return str.normalize("NFD").replace(/\p{Diacritic}/gu, "");
+	return str.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
 }
