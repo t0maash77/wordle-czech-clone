@@ -61,7 +61,27 @@ const highlightLetters = (row) => {
 			const currentLetterValue = lettersCount[letter];
 			lettersCount[letter] = currentLetterValue - 1;
 
-			colorClass = 'correct'
+			//This might actually happen when first letters of a word are just 'present' but also later are 'correct' and shouldn't be marked as 'present' before
+			// Need to go back to them and set them as 'wrong' as they are correct on couple of places later but actually wrong at this point
+			//
+			// example: SOLUTION: 'dinar' | guessedWord: 'radar'
+			// last 2 should be green, and 'd' in radar should be orange
+			// without this check it would do 'rad' orange('present') and 'ar' green('correct') (which is not correct)
+			if (lettersCount[letter] < 0) {
+				row.querySelectorAll('.tile').forEach((tile, index) => {
+					if (lettersCount[letter] >= 0) {
+						return;
+					}
+
+					if (tile.innerHTML === letter) {
+						tile.classList.remove('present');
+						tile.classList.add('wrong');
+						lettersCount[letter] = lettersCount[letter] + 1;
+					}
+				});
+			}
+
+			colorClass = 'correct';
 		}
 		// this letter is present in the solution, but at a different place
 		else if (lettersToCheck.indexOf(letter) >= 0) {
@@ -71,7 +91,7 @@ const highlightLetters = (row) => {
 				const currentLetterValue = lettersCount[letter];
 				lettersCount[letter] = currentLetterValue - 1;
 
-				colorClass = 'present'
+				colorClass = 'present';
 			}
 		}
 
