@@ -2,13 +2,13 @@ const staticDevCoffee = "dev-coffee-site-v1"
 const assets = [
     "/",
     "index.html",
-    "./css/board.css",
-    "./css/effects.css",
-    "./css/general.css",
-    "./js/app.js",
-    "./js/czech.js",
-    "./js/animations.js",
-    "./js/allPossibleWords.js",
+    "css/board.css",
+    "css/effects.css",
+    "css/general.css",
+    "js/app.js",
+    "js/czech.js",
+    "js/animations.js",
+    "js/allPossibleWords.js",
 ]
 
 self.addEventListener("install", installEvent => {
