@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const submitWord = () => {
 	if (word.length !== maxWordLength) return
 
-	// is this a real world?
+	// is this a real word?
 	if (!noAccentWords.includes(noAccents(word))) {
 		animateRowShake(currentRow())
 		return
@@ -110,17 +110,14 @@ const judgeResult = () => {
 	if (noAccents(word) === noAccentSolution) {
 		animateTileDance(currentRow())
 		setTimeout(() => {
-			if (confirm('Vyhrál/a jsi na ' + tries + ' pokusy/ů. Chceš pokračovat?')) {
-				window.location.reload();
-			}
+			getResultDialog();
 		}, 2000)
 	}
 	else if (tries >= maxTries) {
 		youVeryMuchLose()
 
 		setTimeout(() => {
-			alert('Řešení bylo: ' + solution.toUpperCase())
-			window.location.reload()
+			getResultDialog(false);
 		}, 2000)
 	}
 	else {
@@ -162,4 +159,36 @@ const findLettersInRow = () => {
 // REMOVE ACCENTS
 function noAccents (str) {
 	return str.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
+}
+
+function getResultDialog (win = true) {
+	//TODO - stats!
+
+	const message = win === true
+		? '<p>Vyhrál/a jsi na ' + tries + ' pokusy/ů. Chceš pokračovat?</p>'
+		: '<div class="text-center">Řešení bylo: ' + solution.toUpperCase() + '</div>';
+
+	return bootbox.dialog({
+		title: win === true ? 'Vítězství! 🎉' : 'Prohra 😕',
+		message: message,
+		size: 'large',
+		onEscape: true,
+		backdrop: true,
+		buttons: {
+			no: {
+				label: 'Zavřít',
+				className: 'btn-secondary',
+				callback: function(){
+					//TODO - něco udělat
+				}
+			},
+			yes: {
+				label: 'Pokračovat',
+				className: 'btn-primary',
+				callback: function(){
+					window.location.reload();
+				}
+			},
+		}
+	});
 }
