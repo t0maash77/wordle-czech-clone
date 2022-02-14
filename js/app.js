@@ -9,7 +9,10 @@ let possibleSolutions = allWords.filter(x => x.charAt(0) !== x.charAt(0).toUpper
 
 let solution = possibleSolutions[possibleSolutions.length * Math.random() | 0].toLowerCase()
 let noAccentSolution = noAccents(solution)
-let noAccentWords = allWords.map(x => noAccents(x))
+let noAccentWords = allPossibleWords.map(x => noAccents(x))
+let noAccentSolutions = possibleSolutions.map(x => noAccents(x));
+
+noAccentWords = noAccentWords.concat(noAccentSolutions);
 
 let lettersInRow = {
 	correct: [],
@@ -108,6 +111,11 @@ const currentRow = () => {
 const judgeResult = () => {
 	if (noAccents(word) === noAccentSolution) {
 		animateTileDance(currentRow())
+		setTimeout(() => {
+			if (confirm('Vyhrál jsi na ' + tries + ' pokusy/ů. Chceš pokračovat?')) {
+				window.location.reload();
+			}
+		}, 2000)
 	}
 	else if (tries >= maxTries) {
 		youVeryMuchLose()
