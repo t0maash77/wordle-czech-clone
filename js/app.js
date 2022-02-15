@@ -181,18 +181,20 @@ function noAccents (str) {
 }
 
 function getResultDialog (win = true) {
-	//TODO - timer
-
 	const message = win === true
-		? '<p>Vyhrál/a jsi na ' + tries + ' pokusy/ů. Chceš pokračovat?</p>'
-		: '<div class="text-center">Řešení bylo: <b>' + solution.toUpperCase() + '</b></div>';
+		? '<p class="lead">Vyhrál/a jsi na ' + tries + ' pokusy/ů. Chceš pokračovat?</p>'
+		: '<p class="lead">Řešení bylo: <b>' + solution.toUpperCase() + '</b></p>';
 
 	const results = resultsMap.get('results');
 	const resultsMessage = '<canvas id="resultsChart" width="400" height="400"></canvas>';
 
+	const endDate = new Date();
+	const seconds = ((endDate.getTime() - dateStarted.getTime()) / 1000).toFixed(0);
+	const timeMessage = `<p>Zabralo ti to <mark>${seconds} sekund</mark></p>`;
+
 	return bootbox.dialog({
 		title: win === true ? 'Vítězství! 🎉' : 'Prohra 😕',
-		message: message + resultsMessage + getChartScript(
+		message: message + timeMessage + resultsMessage + getChartScript(
 			['`Nevyřešeno`', '`1 pokus`', '`2 pokusy`', '`3 pokusy`', '`4 pokusy`', '`5 pokusů`', '`6 pokusů`'],
 			Object.values(results)),
 		size: 'large',
