@@ -2,6 +2,9 @@
 const maxWordLength = 5
 const maxTries = 6
 
+let resultsMap = new Map();
+let dateStarted = null;
+
 let word = ''
 let tries = 1
 
@@ -23,7 +26,9 @@ let lettersInRow = {
 // KEYBOARD
 document.addEventListener('keydown', (event) => {
 	if (event.key === 'Enter') {
-		submitWord()
+		if (!document.querySelector('button#enter').hasAttribute('disabled')) {
+			submitWord();
+		}
 	}
 	else if (event.key === 'Backspace') {
 		removeLetter()
@@ -39,13 +44,19 @@ document.addEventListener('DOMContentLoaded', () => {
 		button.addEventListener('click', ({target}) => {
 			const key = target.getAttribute('id');
 			if (key === 'enter') {
-				submitWord();
+				if (!document.querySelector('button#enter').hasAttribute('disabled')) {
+					submitWord();
+				}
 			} else if (key === 'delete') {
 				removeLetter();
 			} else{
 				addLetter(key);
 			}
 		})
+	}
+	dateStarted = new Date();
+	if (localStorage.getItem('resultsMap')) {
+		resultsMap = new Map(JSON.parse(localStorage.getItem('resultsMap')));
 	}
 })
 
@@ -58,6 +69,8 @@ const submitWord = () => {
 		animateRowShake(currentRow())
 		return
 	}
+
+	document.querySelector('button#enter').setAttribute('disabled', 'true');
 
 	findLettersInRow()
 	highlightLetters(currentRow())
@@ -108,13 +121,18 @@ const currentRow = () => {
 // JUDGE RESULT
 const judgeResult = () => {
 	if (noAccents(word) === noAccentSolution) {
-		animateTileDance(currentRow())
+		setResultsToStorage();
+
+		animateTileDance(currentRow());
+
 		setTimeout(() => {
 			getResultDialog();
 		}, 2000)
 	}
 	else if (tries >= maxTries) {
-		youVeryMuchLose()
+		setResultsToStorage();
+
+		youVeryMuchLose();
 
 		setTimeout(() => {
 			getResultDialog(false);
@@ -124,6 +142,7 @@ const judgeResult = () => {
 		word = ''
 		tries++
 	}
+	document.querySelector('button#enter').removeAttribute('disabled');
 }
 
 // FIND ALL LETTERS FOR CURRENT ROW
@@ -162,15 +181,20 @@ function noAccents (str) {
 }
 
 function getResultDialog (win = true) {
-	//TODO - stats!
+	//TODO - timer
 
 	const message = win === true
 		? '<p>Vyhrál/a jsi na ' + tries + ' pokusy/ů. Chceš pokračovat?</p>'
 		: '<div class="text-center">Řešení bylo: ' + solution.toUpperCase() + '</div>';
 
+	const results = resultsMap.get('results');
+	const resultsMessage = '<canvas id="resultsChart" width="400" height="400"></canvas>';
+
 	return bootbox.dialog({
 		title: win === true ? 'Vítězství! 🎉' : 'Prohra 😕',
-		message: message,
+		message: message + resultsMessage + getChartScript(
+			['`Nevyřešeno`', '`1 pokus`', '`2 pokusy`', '`3 pokusy`', '`4 pokusy`', '`5 pokusů`', '`6 pokusů`'],
+			Object.values(results)),
 		size: 'large',
 		onEscape: true,
 		backdrop: true,
@@ -191,4 +215,65 @@ function getResultDialog (win = true) {
 			},
 		}
 	});
+}
+
+function setResultsToStorage () {
+	let currentResults = {0: 0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0};
+	if (resultsMap.has('results')) {
+		currentResults = resultsMap.get('results');
+	}
+
+	if (tries < 6) {
+		currentResults[tries] = (isNaN(parseInt(currentResults[tries])) ? 0 : parseInt(currentResults[tries])) + 1;
+	} else {
+		currentResults[0] = (isNaN(parseInt(currentResults[0])) ? 0 : parseInt(currentResults[0])) + 1;
+	}
+
+	resultsMap.set('results', currentResults);
+
+	localStorage.setItem('resultsMap', JSON.stringify([...resultsMap]));
+}
+
+function getChartScript (labels, data) {
+	return `
+	<script>
+		const ctx = document.getElementById('resultsChart').getContext('2d');
+		const myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: [${labels}],
+				datasets: [{
+					label: 'Tolikrát vyřešeno',
+					data: [${data}],
+					backgroundColor: [
+                        'rgba(1, 255, 64, 0.2)',
+						'rgba(255, 99, 132, 0.2)',
+						'rgba(54, 162, 235, 0.2)',
+						'rgba(255, 206, 86, 0.2)',
+						'rgba(75, 192, 192, 0.2)',
+						'rgba(153, 102, 255, 0.2)',
+						'rgba(255, 159, 64, 0.2)',
+					],
+					borderColor: [
+                        'rgba(1, 255, 64, 1)',
+						'rgba(255, 99, 132, 1)',
+						'rgba(54, 162, 235, 1)',
+						'rgba(255, 206, 86, 1)',
+						'rgba(75, 192, 192, 1)',
+						'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)',
+					],
+					borderWidth: 1
+				}]
+			},
+			options: {
+				scales: {
+					y: {
+						beginAtZero: true
+					}
+				}
+			}
+		});
+	</script>
+	`;
 }
