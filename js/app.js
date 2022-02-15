@@ -245,7 +245,7 @@ function getChartScript (labels, data) {
 			data: {
 				labels: [${labels}],
 				datasets: [{
-					label: 'Tolikrát vyřešeno',
+					label: 'Kolikrát: ',
 					data: [${data}],
 					backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
