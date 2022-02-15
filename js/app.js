@@ -130,7 +130,7 @@ const judgeResult = () => {
 		}, 2000)
 	}
 	else if (tries >= maxTries) {
-		setResultsToStorage();
+		setResultsToStorage(false);
 
 		youVeryMuchLose();
 
@@ -185,7 +185,7 @@ function getResultDialog (win = true) {
 
 	const message = win === true
 		? '<p>Vyhrál/a jsi na ' + tries + ' pokusy/ů. Chceš pokračovat?</p>'
-		: '<div class="text-center">Řešení bylo: ' + solution.toUpperCase() + '</div>';
+		: '<div class="text-center">Řešení bylo: <b>' + solution.toUpperCase() + '</b></div>';
 
 	const results = resultsMap.get('results');
 	const resultsMessage = '<canvas id="resultsChart" width="400" height="400"></canvas>';
@@ -217,13 +217,13 @@ function getResultDialog (win = true) {
 	});
 }
 
-function setResultsToStorage () {
+function setResultsToStorage (won = true) {
 	let currentResults = {0: 0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0};
 	if (resultsMap.has('results')) {
 		currentResults = resultsMap.get('results');
 	}
 
-	if (tries < 6) {
+	if (won) {
 		currentResults[tries] = (isNaN(parseInt(currentResults[tries])) ? 0 : parseInt(currentResults[tries])) + 1;
 	} else {
 		currentResults[0] = (isNaN(parseInt(currentResults[0])) ? 0 : parseInt(currentResults[0])) + 1;
@@ -246,8 +246,8 @@ function getChartScript (labels, data) {
 					label: 'Tolikrát vyřešeno',
 					data: [${data}],
 					backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
                         'rgba(1, 255, 64, 0.2)',
-						'rgba(255, 99, 132, 0.2)',
 						'rgba(54, 162, 235, 0.2)',
 						'rgba(255, 206, 86, 0.2)',
 						'rgba(75, 192, 192, 0.2)',
@@ -255,8 +255,8 @@ function getChartScript (labels, data) {
 						'rgba(255, 159, 64, 0.2)',
 					],
 					borderColor: [
+                        'rgba(255, 99, 132, 1)',
                         'rgba(1, 255, 64, 1)',
-						'rgba(255, 99, 132, 1)',
 						'rgba(54, 162, 235, 1)',
 						'rgba(255, 206, 86, 1)',
 						'rgba(75, 192, 192, 1)',
