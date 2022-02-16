@@ -60,13 +60,19 @@ header small {
 
 .keyboard {
 	width: 510px;
+	/*flex-wrap: wrap;*/
 	display: flex;
 	flex-wrap: wrap;
+	max-width: 90vw;
+	align-content: center;
+	justify-content: center;
+	align-items: center;
 }
 
 .keyboard button {
 	width: 43px;
 	height: 58px;
+	min-width: 2.5vw;
 	border-radius: 4px;
 	border: none;
 	background-color: #818384;
@@ -85,8 +91,97 @@ header small {
 }
 
 
+@media only screen and (min-width: 535px) and (max-width: 566px) {
+	header h1 {
+		font-size: 1.5rem;
+		letter-spacing: 0.05rem;
+		margin-right: 0.5rem;
+	}
+
+	.keyboard {
+		grid-template-columns: repeat(16, 1fr);
+	}
+
+	.keyboard button {
+		font-size: 1rem;
+		width: 2.3rem;
+		height: 2rem;
+		line-height: 2rem;
+		margin: .35em;
+	}
+	.keyboard button:nth-child(28) {
+		width: 2rem;
+	}
+	.keyboard button:nth-child(11) {
+		margin-left: 1.2rem;
+	}
+
+	.keyboard button:nth-child(20) {
+		width: 3.3rem;
+	}
+
+	/*.keyboard {*/
+	/*	width: 45vw;*/
+	/*	padding-bottom: 15vh;*/
+	/*	padding-left: 2vw;*/
+	/*}*/
+
+	.board {
+		gap: 1px !important;
+	}
+
+	header {
+		padding-top: 0;
+	}
+}
+
+
 /* RESPONSIVE */
-@media only screen and (min-width: 481px) and (max-width: 940px) {
+@media only screen and (min-width: 511px) and (max-width: 534px) {
+	header h1 {
+		font-size: 1.5rem;
+		letter-spacing: 0.05rem;
+		margin-right: 0.5rem;
+	}
+
+	.keyboard {
+		grid-template-columns: repeat(16, 1fr);
+	}
+
+	.keyboard button {
+		font-size: 1rem;
+		width: 2.1rem;
+		height: 2rem;
+		line-height: 2rem;
+		margin: .35em;
+	}
+	.keyboard button:nth-child(28) {
+		width: 2rem;
+	}
+	.keyboard button:nth-child(11) {
+		margin-left: 1.2rem;
+	}
+
+	.keyboard button:nth-child(20) {
+		width: 3.3rem;
+	}
+
+	/*.keyboard {*/
+	/*	width: 45vw;*/
+	/*	padding-bottom: 15vh;*/
+	/*	padding-left: 2vw;*/
+	/*}*/
+
+	.board {
+		gap: 1px !important;
+	}
+
+	header {
+		padding-top: 0;
+	}
+}
+
+@media only screen and (min-width: 475px) and (max-width: 510px) {
 	header h1 {
 		font-size: 1.5rem;
 		letter-spacing: 0.05rem;
@@ -99,7 +194,7 @@ header small {
 
 	.keyboard button {
 		font-size: .8rem;
-		width: 1.5rem;
+		width: 2.1rem;
 		height: 2rem;
 		line-height: 2rem;
 		margin: .35em;
@@ -115,10 +210,38 @@ header small {
 		width: 3.3rem;
 	}
 
-	.keyboard {
-		width: 45vw;
-		padding-bottom: 15vh;
-		padding-left: 2vw;
+	/*.keyboard {*/
+	/*	width: 45vw;*/
+	/*	padding-bottom: 15vh;*/
+	/*	padding-left: 2vw;*/
+	/*}*/
+
+	.board {
+		gap: 1px !important;
+	}
+
+	header {
+		padding-top: 0;
+	}
+}
+
+@media only screen and (min-width: 447px) and (max-width: 474px) {
+	.keyboard button {
+		font-size: .9rem;
+		width: 1.8rem;
+		height: 2rem;
+		line-height: 2rem;
+		margin: .35em;
+	}
+	.keyboard button:nth-child(28) {
+		width: 2rem;
+	}
+	.keyboard button:nth-child(11) {
+		margin-left: 1.2rem;
+	}
+
+	.keyboard button:nth-child(20) {
+		width: 3.3rem;
 	}
 
 	.board {
@@ -130,7 +253,41 @@ header small {
 	}
 }
 
-@media only screen and (min-width: 401px) and (max-width: 480px) {
+@media only screen and (min-width: 402px) and (max-width: 446px) {
+	.keyboard button {
+		font-size: .8rem;
+		width: 1.7rem;
+		height: 2rem;
+		line-height: 2rem;
+		margin: .35em;
+	}
+	.keyboard button:nth-child(28) {
+		width: 2rem;
+	}
+	.keyboard button:nth-child(11) {
+		margin-left: 1.2rem;
+	}
+
+	.keyboard button:nth-child(20) {
+		width: 3.3rem;
+	}
+
+	/*.keyboard {*/
+	/*	width: 80vw;*/
+	/*	padding-bottom: 15vh;*/
+	/*	padding-left: 2vw;*/
+	/*}*/
+
+	.board {
+		gap: 1px !important;
+	}
+
+	header {
+		padding-top: 0;
+	}
+}
+
+@media only screen and (min-width: 366px) and (max-width: 401px) {
 	.keyboard button {
 		font-size: .8rem;
 		width: 1.5rem;
@@ -139,21 +296,21 @@ header small {
 		margin: .35em;
 	}
 	.keyboard button:nth-child(28) {
-		width: 2rem;
+		width: 1.9rem;
 	}
 	.keyboard button:nth-child(11) {
 		margin-left: 1.2rem;
 	}
 
 	.keyboard button:nth-child(20) {
-		width: 3.3rem;
+		width: 3.2rem;
 	}
 
-	.keyboard {
-		width: 80vw;
-		padding-bottom: 15vh;
-		padding-left: 2vw;
-	}
+	/*.keyboard {*/
+	/*	width: 90vw;*/
+	/*	padding-bottom: 15vh;*/
+	/*	padding-left: 2vw;*/
+	/*}*/
 
 	.board {
 		gap: 1px !important;
@@ -164,10 +321,10 @@ header small {
 	}
 }
 
-@media only screen and (min-width: 375px) and (max-width: 400px) {
+@media only screen and (max-width: 365px) {
 	.keyboard button {
-		font-size: .8rem;
-		width: 1.5rem;
+		font-size: .7rem;
+		width: 1.3rem;
 		height: 2rem;
 		line-height: 2rem;
 		margin: .35em;
@@ -183,45 +340,13 @@ header small {
 		width: 3.3rem;
 	}
 
-	.keyboard {
-		width: 90vw;
-		padding-bottom: 15vh;
-		padding-left: 2vw;
-	}
-
-	.board {
-		gap: 1px !important;
-	}
-
-	header {
-		padding-top: 0;
-	}
-}
-
-@media only screen and (max-width: 374px) {
-	.keyboard button {
-		font-size: .5rem;
-		width: 1.5rem;
-		height: 2rem;
-		line-height: 2rem;
-		margin: .35em;
-	}
-	.keyboard button:nth-child(28) {
-		width: 2rem;
-	}
-	.keyboard button:nth-child(11) {
-		margin-left: 1.2rem;
-	}
-
-	.keyboard button:nth-child(20) {
-		width: 3.3rem;
-	}
-
-	.keyboard {
-		width: 91vw;
-		padding-bottom: 15vh;
-		padding-left: 10vw;
-	}
+	/*.keyboard {*/
+	/*	max-width: 90vw;*/
+	/*	flex-wrap: wrap;*/
+	/*	align-content: center;*/
+	/*	justify-content: center;*/
+	/*	align-items: center;*/
+	/*}*/
 
 	.board {
 		gap: 1px !important;
